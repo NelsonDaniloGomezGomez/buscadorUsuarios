@@ -10,3 +10,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+
+@media (max-width: 500px) {
+  #app{
+    margin-top: 1.5rem ;
+  }
+}
