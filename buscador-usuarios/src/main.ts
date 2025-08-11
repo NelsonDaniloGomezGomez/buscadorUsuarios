@@ -4,6 +4,8 @@ import './assets/styles/style.css';
 import './components/barra-busqueda';
 import './components/tarjeta-usuario';
 import './components/spinner';
+import './components/app-header';
+import './components/app-footer';
 //importamos sevicios
 import { UsuariosService } from './services/usuariosService.js';
 //importamos funciones para limpiar URLs y limitar texto
@@ -13,17 +15,24 @@ import type { TarjetaUsuario } from './components/tarjeta-usuario'; //para poder
 import type { Usuario } from './types/usuario.js';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
+const main = document.createElement('main');
 const barraBusqueda = document.createElement('barra-busqueda');
 const tarjetaUsuario = document.createElement('tarjeta-usuario') as TarjetaUsuario;
 const spinner = document.createElement('mi-spinner');
+const header = document.createElement('app-header');
+const footer = document.createElement('app-footer');
 
 //servicio con la URL base
 const usuarioABuscar = new UsuariosService('https://api.github.com');
 
-//agregamos los componentes al DOM
-app.appendChild(barraBusqueda);
-app.appendChild(tarjetaUsuario);
+//los incorporamos al main
+main.appendChild(barraBusqueda);
+main.appendChild(tarjetaUsuario);
 
+//agregamos los componentes al DOM
+app.prepend(header); 
+app.appendChild(main);
+app.appendChild(footer);
 //variable para evitar busquedas iguales
 let ultimoUsuario = '';
 
@@ -41,8 +50,8 @@ barraBusqueda.addEventListener('usuario-buscado', async (e) => {
   ultimoUsuario = nombre;
 
   //si el snipper no esta lo agregamos para mostrar carga
-  if (!app.contains(spinner)) {
-    app.appendChild(spinner);
+  if (!main.contains(spinner)) {
+    main.appendChild(spinner);
   }
 
   try {
@@ -65,8 +74,8 @@ barraBusqueda.addEventListener('usuario-buscado', async (e) => {
 
   } finally {
     //quitamos el spinner al terminar la consulta
-    if (app.contains(spinner)) {
-      app.removeChild(spinner);
+    if (main.contains(spinner)) {
+      main.removeChild(spinner);
     }
 
   }

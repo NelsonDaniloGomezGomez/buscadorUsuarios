@@ -13,74 +13,96 @@ export class BarraBusqueda extends HTMLElement {
 
     estilo.textContent = `
       .contenedor {
-        width: 100%;
-        max-width: 40rem;
-        padding: 3rem 3rem 1rem 3rem;
+        justify-content: center;
         display: flex;
-        gap: 0.5rem;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .barraBusqueda {
+        width: 100%;
+        padding: 2rem 2rem 1rem 2rem;
+        display: flex;
+        gap: 0.75rem;
         box-sizing: border-box;
-        overflow: hidden; 
+        border-radius: 12px;
+        max-width: 40rem;
       }
 
       input {
-        width: 100%;
-        padding: 0.4rem;
-        font-size: 1.5rem;
+        flex: 1 1 auto;
+        padding: 0.6rem 1rem;
+        font-size: 1.3rem;
         background-color: #fff;
-        border-radius: 15px;
-        height: 2rem;
+        border: 2px solid #cbd5e0;
+        border-radius: 12px;
+        transition: border-color 0.3s ease;
+        height: 2.8rem;
+        box-sizing: border-box;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #4e8150ff;
+        box-shadow: 0 0 6px #85a386ff;
       }
 
       button {
-        padding: 6px 12px;
-        border-radius: 15px;
-        font-size: 1.5rem;
+        padding: 0 1.5rem;
+        border-radius: 12px;
+        font-size: 1.3rem;
         cursor: pointer;
-        background-color: #569e56ff;
+        background-color: #4caf50;
         color: #fff;
+        border: none;
+        height: 2.8rem;
+        transition: background-color 0.3s ease;
+        font-weight: 600;
+        box-shadow: 0 3px 6px rgba(76,175,80,0.4);
       }
 
-      button:hover {
-        background-color: #2a852aff;
+      button:hover, button:focus {
+        background-color: #388e3c;
+        box-shadow: 0 4px 10px rgba(56,142,60,0.6);
+        outline: none;
       }
 
       .error {
-        padding: 0rem 3rem 3rem 3rem;
-        color: red;
+        padding: 0.1rem 2rem 2rem 2.9rem;
+        color: #e53e3e;
         font-size: 1rem;
         height: 1.2rem;
         margin-left: 0.5rem;
         display: none;
+        font-weight: 600;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 12px;
+        max-width: 40rem;
       }
-      
+
       @media (max-width: 500px) {
-        .contenedor {
-          width: 100%;
-          padding: 0.5rem;
-          display: flex;
+        .barraBusqueda {
+          padding: 1rem 1rem 0.5rem 1rem;
+          gap: 0.5rem;
         }
 
         input {
-          flex: 1 1 auto;
           min-width: 0;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           height: 2.5rem;
-          box-sizing: border-box;
         }
 
         button {
-          flex-shrink: 0;
-          min-width: 7.5rem;
-          box-sizing: border-box;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           height: 2.5rem;
+          min-width: rem;
         }
 
         .error {
-        width: 100%;
-        padding: 0rem 0rem 0rem .5rem;
+          width: 100%;
+          padding: 0 0 0 2rem;
         }
-
       }
     `;
 
@@ -88,16 +110,16 @@ export class BarraBusqueda extends HTMLElement {
     const contenedor = document.createElement("div");
     contenedor.classList.add("contenedor");
     contenedor.innerHTML = `
-      <input type="text" placeholder="Ingrese un nombre" />
-      <button>Buscar</button>
+      <div class="barraBusqueda">
+        <input type="text" placeholder="Ingrese un nombre" />
+        <button>Buscar</button>
+      </div>
     `;
 
     //mantenemos las referencias del input y botón
     this.input = contenedor.querySelector("input")!;
     this.input.setAttribute("aria-label", "Nombre de usuario a buscar");
-
     this.boton = contenedor.querySelector("button")!;
-
 
     //creamos el div que contendra el error, agregamos la clase error.
     this.mensajeError = document.createElement("div");
@@ -107,10 +129,12 @@ export class BarraBusqueda extends HTMLElement {
     this.mensajeError.setAttribute("tabindex", "-1");
     this.mensajeError.textContent = "Por favor ingresa un nombre de usuario";
 
+    //agregamos el mensaje de error al contenedor
+    contenedor.appendChild(this.mensajeError);    
+
     //insertamos los estilos, contenedor y mensaje de error al shadow DOM
     shadow.appendChild(estilo);
     shadow.appendChild(contenedor);
-    shadow.appendChild(this.mensajeError);
   }
 
   //handlers

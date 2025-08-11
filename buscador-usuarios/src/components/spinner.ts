@@ -9,11 +9,11 @@ export class Spinner extends HTMLElement {
 
     estilo.textContent = `
         .spinner {
-          border: 4px solid rgba(0,0,0,0.1);
+          border: 10px solid rgba(0,0,0,0.1);
           border-left-color: #4caf50;
           border-radius: 50%;
-          width: 30px;
-          height: 30px;
+          width: 50px;
+          height: 50px;
           animation: girar 1s linear infinite;
           margin: 1rem auto;
         }

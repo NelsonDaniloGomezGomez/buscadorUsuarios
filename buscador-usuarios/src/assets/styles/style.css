@@ -11,10 +11,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
 
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-@media (max-width: 500px) {
-  #app{
-    margin-top: 1.5rem ;
-  }
+main {
+  flex-grow: 1;
 }

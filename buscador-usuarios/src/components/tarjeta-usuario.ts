@@ -16,59 +16,98 @@ export class TarjetaUsuario extends HTMLElement {
     const estilo = document.createElement('style');
     estilo.textContent = `
         .contenedorTarjetas {
-            width: 100%;
-            border-radius: 5px;
-            display: flex;
-        }
-        .tarjeta {
-            min-width: 350px;
-            width: 100%;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            padding: 0.5rem;
-            margin: 3rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            font-family: Arial, sans-serif;
-        }
-        img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto;
-        }
-        h2 {
-            text-align: center;
-            margin: 0.5rem 0 0.2rem 0;
-            font-size: 1.5rem;
-            color: #333;
-        }
-        p {
-            text-align: center;
-            margin: 0.3rem 0;
-            font-size: 1rem;
-            color: #666;
-        }
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 1rem;
-            color: #0366d6;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
 
-        @media (max-width: 500px){
+.tarjeta {
+  max-width: 550px;
+  width: 100%;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 2rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  color: #222;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
 
-          .tarjeta{
-              width:100%;
-              min-width: 0!important;
-              margin: 1rem;
-          }
-        }
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1rem auto;
+  border: 3px solid #4caf50;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  margin: 0.5rem 0 0.4rem 0;
+  font-size: 1.7rem;
+  color: #2f4f4f;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+p {
+  text-align: center;
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 1.3rem;
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #388e3c;
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .tarjeta {
+    margin: 1rem 0.5rem;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  img {
+    width: 90px;
+    height: 90px;
+    border-width: 2px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p, a {
+    font-size: 1rem;
+  }
+}
+
     `;
 
     //creamos el contenedor, agregamos la clase y insertamos el contenido para mostrar los datos
