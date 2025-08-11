@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 //si no está disponible, la aplicación fallará al arrancar.
 //si se quita strictPort, Vite buscará y usará automáticamente un puerto disponible.
 export default defineConfig({
+  base: '/buscadorUsuarios/',
   server: {
     port: 4200,
     strictPort: true,
